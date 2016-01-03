@@ -1,0 +1,115 @@
+/*
+ * HashTable.h
+ *
+ *  Created on: Jan 23, 2015
+ *      Author: Komani
+ */
+
+#ifndef HASHTABLE_H_
+#define HASHTABLE_H_
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include "EmployeeTelephoneRecords.h"
+
+using namespace std;
+
+template<typename HashedObj, typename Key>
+class HashTable{
+	public:
+		HashTable(int size = 101) : currentSize(size){
+				//HashedObj temp("", 0);
+				HashedEntry.assign(101,HashedObj("", 0););
+		};
+		bool contains(HashedObj & x);
+		void insert(HashedObj & x);
+		void remove(Key key);
+		HashedObj* searchValue(Key key);
+		int hashFunction(Key, int);
+		int hash(Key);
+
+
+	private:
+
+		vector< HashedObj > HashedEntry;
+		int currentSize;
+};
+
+
+template<typename HashedObj, typename Key>
+bool HashTable<HashedObj, Key> :: contains(HashedObj & x) {
+	for(int i = 0; HashedEntry[hashFunction(x.getKey(), i)].getHashFlag() != 0; i++){
+		if(HashedEntry[hashFunction(x.getKey(), i)].getKey() == x.getKey()){
+			return true;
+		}
+	}
+	return false;
+}
+
+template<typename HashedObj, typename Key>
+void HashTable<HashedObj, Key> :: insert(HashedObj & x) {
+	int i=0;
+
+	for(i = 0; HashedEntry[hashFunction(x.getKey(), i)].getHashFlag() != 0 && HashedEntry[hashFunction(x.getKey(), i)].getHashFlag() != 2; i++){
+
+		if(HashedEntry[hashFunction(x.getKey(), i)].getKey() == x.getKey()){
+			cout<<"Key already exists"<<endl;
+			return;
+		}
+	}
+
+	HashedEntry[hashFunction(x.getKey(), i)] = x;
+	HashedEntry[hashFunction(x.getKey(), i)].setHashFlag(1);
+
+	cout<<"Insertion Successful"<<endl;
+}
+
+template<typename HashedObj, typename Key>
+void HashTable<HashedObj, Key> :: remove(Key key) {
+	for(int i = 0; HashedEntry[hashFunction(key, i)].getHashFlag() != 0 || HashedEntry[hashFunction(key, i)].getHashFlag() == 2; i++){
+		if(HashedEntry[hashFunction(key, i)].getKey() == key){
+			HashedEntry[hashFunction(key, i)].setKey("");
+			HashedEntry[hashFunction(key, i)].setValue(0);
+			HashedEntry[hashFunction(key, i)].setHashFlag(2);
+			cout<<"Delete Successful"<<endl;
+			return;
+		}
+	}
+	cout<<"Delete Unsuccessfull."<<endl;
+
+}
+
+template<typename HashedObj, typename Key>
+HashedObj* HashTable<HashedObj, Key> :: searchValue(Key key) {
+	for(int i = 0; HashedEntry[hashFunction(key, i)].getHashFlag() != 0; i++){
+		if(HashedEntry[hashFunction(key, i)].getKey() == key){
+			return &HashedEntry[hashFunction(key, i)];
+		}
+
+	}
+	return NULL;
+}
+
+template<typename HashedObj, typename Key>
+int HashTable<HashedObj, Key> :: hashFunction(Key key, int i) {
+	int hashValue = hash(key) + i;
+	hashValue%=HashedEntry.size();
+	if(hashValue < 0)
+		hashValue+=HashedEntry.size();
+	return hashValue;
+
+}
+
+template<typename HashedObj, typename Key>
+int HashTable<HashedObj, Key> :: hash(Key key) {
+	int hashValue = 0;
+	for(int i = 0; i < key.length(); i++){
+		hashValue = 37*hashValue + key[i];
+	}
+
+	return hashValue;
+}
+
+
+#endif /* HASHTABLE_H_ */

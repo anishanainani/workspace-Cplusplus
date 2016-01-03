@@ -1,0 +1,31 @@
+/*
+ * setOfStacks.h
+ *
+ *  Created on: Feb 17, 2015
+ *      Author: Komani
+ */
+
+#ifndef SETOFSTACKS_H_
+#define SETOFSTACKS_H_
+
+#include<iostream>
+#include<vector>
+#include "stack.h"
+
+using namespace std;
+
+class setOfStacks{
+	public:
+		setOfStacks() : MAXSIZE(20), currentStack(0){stacks.push_back(stack(MAXSIZE));};
+		void push(int value);
+		int popAt(int index);
+		int pop();
+	private:
+		int MAXSIZE;
+		vector<stack> stacks;
+		int currentStack;
+};
+
+
+
+#endif /* SETOFSTACKS_H_ */

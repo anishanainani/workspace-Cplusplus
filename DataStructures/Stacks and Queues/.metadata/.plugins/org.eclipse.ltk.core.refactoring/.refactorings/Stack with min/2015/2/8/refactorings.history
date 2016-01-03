@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Stack with min/stachWithMin.h&apos; to &apos;stackWithMin.h&apos;" description="Rename resource &apos;stachWithMin.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="stachWithMin.h" name="stackWithMin.h" stamp="1424208520194" updateReferences="true"/>
+</session>

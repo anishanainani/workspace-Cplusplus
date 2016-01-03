@@ -1,0 +1,220 @@
+/*
+ * binaryTree.cpp
+ *
+ *  Created on: Jan 16, 2015
+ *      Author: Komani
+ */
+
+#include<iostream>
+
+#include "Node.h"
+#include<math.h>
+
+using namespace std;
+
+template<class T>
+class binaryTree{
+	private:
+		Node<T>* root;
+
+	public:
+		binaryTree<T>() : root(NULL) {};
+
+		Node<T>* getRoot() { return root; }
+		void insertNode(T);
+		void deleteNode(Node<T>*);
+		Node<T>* findNode(T);
+		void deleteTree(Node<T>*);
+		int getHeight();
+		int treeHeight(Node<T>*);
+
+		void  preorder();
+		void  preorderTraversal(Node<T>*);
+
+		void  inorder();
+		void  inorderTraversal(Node<T>*);
+
+		void  postorder();
+		void  postorderTraversal(Node<T>*);
+
+		Node<T>* lowestCommonAncestor(Node<T>*,Node<T>*);
+		Node<T>* findLowestCommonAncestor(Node<T>*,T,T);
+		~binaryTree<T>();
+
+};
+
+template<class T>
+void binaryTree<T> :: insertNode(T value){
+	Node<T>* curNode = root;
+	Node<T>* newNode = new Node<T>(value);
+	if(!newNode){
+		cout<<"Memory Allocation failed."<<endl;
+		return;
+	}
+
+	if(!root){
+			root = newNode;
+			return;
+	}
+
+	while(true){
+		if(curNode->getValue() < value){
+			if(!curNode->getRight()) {
+				curNode->setRight(newNode);
+				break;
+			}
+			curNode = curNode->getRight();
+		} else {
+			if(!curNode->getLeft()){
+				curNode->setLeft(newNode);
+				break;
+			}
+			curNode = curNode->getLeft();
+		}
+	}
+
+
+};
+
+template<class T>
+void  binaryTree<T> :: deleteNode(Node<T>* deleteMe){
+
+}
+
+template<class T>
+Node<T>*  binaryTree<T> ::findNode(T value){
+	Node<T>* curNode = root;
+
+	while(true){
+		if(!curNode) return NULL;
+
+		if(curNode->getValue() == value) return curNode;
+		if(curNode->getValue() < value){
+			curNode = curNode->getRight(); // findNode(curNode->getRight(), value);
+		} else {
+			curNode = curNode->getLeft(); // findNode(curNode->getLeft(), value);
+		}
+	}
+}
+
+template<class T>
+int binaryTree<T> :: getHeight(){
+	return treeHeight(root);
+}
+
+template<class T>
+int binaryTree<T> :: treeHeight(Node<T>* start){
+	if(start == NULL) return -1;
+	return 1 + fmax(treeHeight( start->getLeft() ),
+					treeHeight( start->getRight() ) );
+}
+
+template<class T>
+void binaryTree<T> :: preorder(){
+	preorderTraversal(root);
+}
+
+template<class T>
+void binaryTree<T> :: preorderTraversal(Node<T>* start){
+	if(start == NULL) return;
+	cout<<start->getValue()<<endl;
+	preorderTraversal(start->getLeft());
+	preorderTraversal(start->getRight());
+}
+
+template<class T>
+void binaryTree<T> :: inorder(){
+	inorderTraversal(root);
+}
+
+template<class T>
+void binaryTree<T> :: inorderTraversal(Node<T>* start){
+	if(start == NULL) return;
+	inorderTraversal(start->getLeft());
+	cout<<start->getValue()<<endl;
+	inorderTraversal(start->getRight());
+}
+
+template<class T>
+void binaryTree<T> :: postorder(){
+	postorderTraversal(root);
+}
+
+template<class T>
+void binaryTree<T> :: postorderTraversal(Node<T>* start){
+	if(start == NULL) return;
+	postorderTraversal(start->getLeft());
+	postorderTraversal(start->getRight());
+	cout<<start->getValue()<<endl;
+}
+
+template<class T>
+Node<T>* binaryTree<T> :: lowestCommonAncestor(Node<T>* node1, Node<T>* node2){
+	if(!node1 || !node2){
+		cout<<"Nodes not found."<<endl;
+		return NULL;
+	}
+	return findLowestCommonAncestor(root, node1->getValue(), node2->getValue());
+}
+
+template<class T>
+Node<T>* binaryTree<T> :: findLowestCommonAncestor(Node<T>* start, T value1, T value2){
+	if(start != NULL){
+		T value = start->getValue();
+		if(value > value1 && value > value2){
+			return findLowestCommonAncestor(start->getLeft(), value1, value2);
+		} else if(value < value1 && value < value2){
+			return findLowestCommonAncestor(start->getRight(), value1, value2);
+		} else {
+			return start;
+		}
+	}
+	return NULL;
+}
+
+template<class T>
+binaryTree<T> :: ~binaryTree(){
+
+	deleteTree(root);
+	root = NULL;
+};
+
+
+template<class T>
+void binaryTree<T> :: deleteTree(Node<T>* start){
+	if(start != NULL){
+
+	deleteTree(start->getLeft());
+	deleteTree(start->getRight());
+	delete start;
+	}
+};
+
+template<class T>
+void binaryTree<T> :: isBalanced(){
+	Node* temp = root;
+	while(temp->getLeft()){
+		++dist;
+	}
+
+	return checkBalanced(root, 0);
+}
+
+
+bool isBalanced(Node* curElem, int d){
+if(curElem->getLeft()){
+if(!isBalanced(curElem->getLeft(), d+1)){
+return false;
+}
+ }
+
+if(curElem->getRight()){
+if(!isBalanced(curElem->getRight(), d+1)){
+		return false;
+}
+}
+
+int diff =dist-d-1;
+if(diff > 1 || diff < -1) return false;
+else return true;
+}

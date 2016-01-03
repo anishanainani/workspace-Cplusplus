@@ -1,0 +1,37 @@
+/*
+ * stackWithMin.cpp
+ *
+ *  Created on: Feb 17, 2015
+ *      Author: Komani
+ */
+
+#include<iostream>
+#include "stackWithMin.h"
+
+using namespace std;
+
+void stack :: push(int value){
+	if(top == MAXSIZE-1){
+		cout<<"Error : Stack Overflow"<<endl;
+	}
+
+	stack[top++] = value;
+
+	if(value < min()){
+		minValues[++minTop] = value;
+	}
+};
+
+int stack :: pop(){
+	if(top == -1){
+		cout<<"Error : Stack Underflow"<<endl;
+	}
+
+	return stack[top--];
+};
+
+int stack :: min(){
+
+};
+
+

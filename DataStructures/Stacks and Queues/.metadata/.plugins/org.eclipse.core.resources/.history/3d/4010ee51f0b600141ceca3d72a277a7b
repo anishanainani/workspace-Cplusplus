@@ -1,0 +1,15 @@
+/*
+ * main.cpp
+ *
+ *  Created on: Feb 17, 2015
+ *      Author: Komani
+ */
+
+#include<iostream>
+#include "stackWithMin.h"
+
+using namespace std;
+
+int main(){
+	return 0;
+}

@@ -1,0 +1,18 @@
+/*
+ * setOfStacks.cpp
+ *
+ *  Created on: Feb 17, 2015
+ *      Author: Komani
+ */
+
+#include<iostream>
+#include "setOfStacks.h"
+
+using namespace std;
+
+void setOfStacks :: push(int value){
+	if(setOfStacks)
+}
+
+
+

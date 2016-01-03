@@ -1,0 +1,25 @@
+/*
+ * stackWithMin.cpp
+ *
+ *  Created on: Feb 17, 2015
+ *      Author: Komani
+ */
+
+#include<iostream>
+#include "stackWithMin.h"
+
+using namespace std;
+
+void stack :: push(int value){
+
+};
+
+int stack :: pop(){
+
+};
+
+int stack :: min(){
+
+};
+
+

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;HashMaps - Chaining/Record.h&apos; to &apos;EmployeeTelephoneRecords.h&apos;" description="Rename resource &apos;Record.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Record.h" name="EmployeeTelephoneRecords.h" stamp="1421966067077" updateReferences="true"/>
+</session>

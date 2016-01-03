@@ -1,0 +1,32 @@
+/*
+ * stack.h
+ *
+ *  Created on: Feb 17, 2015
+ *      Author: Komani
+ */
+
+#ifndef STACK_H_
+#define STACK_H_
+
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+class stack{
+
+	public:
+		stack(int maxSize) : top(-1), MAXSIZE(maxSize){ stack = new int[MAXSIZE];}
+		void push(int value);
+		int pop();
+
+	private:
+		int MAXSIZE;
+		int* stack;
+		int top, minTop;
+		vector<int> minValues;
+};
+
+
+
+#endif /* STACK_H_ */

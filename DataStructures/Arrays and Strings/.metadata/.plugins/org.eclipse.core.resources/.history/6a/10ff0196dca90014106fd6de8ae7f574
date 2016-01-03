@@ -1,0 +1,72 @@
+
+import javax.swing.*;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class SwitchTestApplication implements ActionListener{
+    JTextField jt=new JTextField(5);
+    int aCount,bCount,cCount,dCount,fCount;
+    SwitchTestApplication(){
+        JFrame frame= new JFrame("Grade Counter App");
+        JPanel panel1= new JPanel();
+        JPanel panel2= new JPanel();
+        panel1.setLayout(new FlowLayout());
+        panel2.setLayout(new FlowLayout());
+        JLabel label1= new JLabel(
+        "Totals for each letter grade:" + "\n" +
+        "A: " + aCount +
+        "B: " + bCount +        
+        "C: " + cCount +        
+        "D: " + dCount +
+        "F: " + fCount 
+        );
+        JLabel label2= new JLabel("Enter Grade");
+        jt.addActionListener(this);
+        panel1.add(label1);
+        panel2.add(label2);
+        panel2.add(jt);
+        frame.add(panel1);
+        frame.add(panel2);
+        frame.setSize(200, 300);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+    
+    public void actionPerformed(ActionEvent e){
+        String val=e.getActionCommand();
+        char grade= val.charAt(0);
+        jt.setText("");
+        switch (grade){
+            case 'A': case 'a':
+               ++aCount;
+               break;
+            case 'B': case 'b':
+               ++bCount;
+               break;
+            case 'C': case 'c':
+               ++cCount;
+               break;
+            case 'D': case 'd':
+                ++dCount;
+                break;
+            case 'F': case 'f':
+                ++fCount;
+                break;
+            case ' ':
+                JOptionPane.showMessageDialog(null, "Error on Input: No characters entered", "Please Enter a Valid Grade", JOptionPane.INFORMATION_MESSAGE);
+            default:
+                JOptionPane.showMessageDialog(null, "Error on Input:" + grade, "Please Enter a Valid Grade", JOptionPane.INFORMATION_MESSAGE);
+                //showStatus("Error on input:"+ grade);
+        }
+    }
+    
+    public static void main(String s[]){
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                new SwitchTestApplication();
+            }
+        });
+    }
+}

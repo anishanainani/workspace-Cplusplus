@@ -1,0 +1,30 @@
+/*
+ * stackWithMin.h
+ *
+ *  Created on: Feb 17, 2015
+ *      Author: Komani
+ */
+
+#ifndef STACKWITHMIN_H_
+#define STACKWITHMIN_H_
+
+#include<iostream>
+
+using namespace std;
+
+class stack{
+
+	public:
+		stack() : top(0){ stack = new int[MAXSIZE];}
+		void push(int value);
+		int pop();
+		int min();
+	private:
+		int const MAXSIZE = 20;
+		int* stack = NULL;
+		int top, minTop;
+		vector<int> minValues;
+};
+
+
+#endif /* STACKWITHMIN_H_ */
